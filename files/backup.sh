@@ -14,8 +14,6 @@ clean_environment(){
 }
 trap clean_environment EXIT
 
-echo "Backups will be set to run using cron schedule: ${CRON_SCHEDULE}"
-
 BACKUP_FILE="consul-backup-$(date +"%H-%M-%S").snap"
 S3_BACKUP_DIR="$(date +"%Y")/$(date +"%m")/$(date +"%d")"
 
