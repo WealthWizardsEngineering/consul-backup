@@ -25,6 +25,6 @@ Update `env.list` accordingly and run:
 ##
 #### Set only for restore
 - `REMOTE_FILE_PATH`: 2018/02/16/consul-backup-11-03-17.snap
-- `CONSUL_BOOTSTRAP_TOKEN`: what is says on the tin; generated during a new Consul cluster setup
+- `CONSUL_BOOTSTRAP_TOKEN`: what it says on the tin; generated during a new Consul cluster setup
 - `ACCESS_KEY`: AWS access key
 - `SECRET_KEY`: AWS secret key
