@@ -1,9 +1,6 @@
 #!/bin/bash
 set -eo pipefail
 
-# Define where and how to send events to influx
-POST2INFLUX="curl -XPOST --data-binary @- ${INFLUXDB_URL}"
-
 # Allow me to pass a KUBE_SA_TOKEN so I can test this without having to run it on Kube
 if [[ -z $KUBE_SA_TOKEN ]]; then
   KUBE_SA_TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)

@@ -19,6 +19,9 @@ echo "Backups will be set to run using cron schedule: ${CRON_SCHEDULE}"
 BACKUP_FILE="consul-backup-$(date +"%H-%M-%S").snap"
 S3_BACKUP_DIR="$(date +"%Y")/$(date +"%m")/$(date +"%d")"
 
+# Define where and how to send events to influx
+POST2INFLUX="curl -XPOST --data-binary @- ${INFLUXDB_URL}"
+
 # Get CONSUL_HTTP_TOKEN, GPG_PHRASE, ACCESS_KEY and SECRET_KEY
 source /environment.sh
 
