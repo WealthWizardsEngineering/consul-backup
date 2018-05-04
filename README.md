@@ -1,6 +1,10 @@
 # consul-backup
 Backup a Consul cluster used as Vault storage backend and running on Kubernetes
 
+## Run it on Kubernetes:
+Edit `k8s-cronjob.yaml` as needed and then run:
+`kubectl apply -f k8s-cronjob.yaml`
+
 ## Take a one time backup:
 Update `env.list` accordingly and run:
 `make backup`

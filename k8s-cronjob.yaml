@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: consul-backup
+---
+
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: consul-backup
+spec:
+  schedule: "12 6-20 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: consul-backup
+          restartPolicy: OnFailure
+          containers:
+          - name: consul-backup
+            image: quay.io/wealthwizards/consul-backup:0.0.1
+            imagePullPolicy: Always
+            terminationMessagePath: "/var/log/consul-backup_termination.log"
+            resources:
+              requests:
+                memory: "100M"
+                cpu: 0.01
+            env:
+            - name: AWS_IAM_POLICY
+              value: "s3-consul-backup"
+            - name: CONSUL_HTTP_ADDR
+              value: "https://consul.mydomain"
+            - name: INFLUXDB_URL
+              value: "https://influx.mydomain/write?db=backups"
+            - name: KUBERNETES_AUTH_PATH
+              value: "kube"
+            - name: S3_BUCKET
+              value: "consul-backup"
+            - name: VAULT_ADDR
+              value: "https://vault.mydomain"
+            - name: VAULT_AWS_AUTH_PATH
+              value: "aws-s3-consul-backup"
+            - name: VAULT_LOGIN_ROLE
+              value: "consul-backup"
+---
