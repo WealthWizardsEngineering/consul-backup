@@ -52,10 +52,19 @@ export CONSUL_HTTP_TOKEN=$(curl -sS --header "X-Vault-Token: ${APPROLE_TOKEN}" \
 # For example:
 #   - {{ "errors": [ "invalid role name \"non_existent_role\"" ] }
 #   - {"errors":["permission denied"]}
-for i in "$VAULT_LOGIN_TOKEN" "$ROLE_ID" "$SECRET_ID" \
-          "$APPROLE_TOKEN" "$AWS_KEYS" "$GPG_PHRASE" "$CONSUL_HTTP_TOKEN"; do
-  if [[ $(echo $i | grep errors) ]]; then
-    echo $i
+declare -A ARRAY=(
+  ["VAULT_LOGIN_TOKEN"]="$VAULT_LOGIN_TOKEN"
+  ["ROLE_ID"]="$ROLE_ID"
+  ["SECRET_ID"]="$SECRET_ID"
+  ["APPROLE_TOKEN"]="$APPROLE_TOKEN"
+  ["AWS_KEYS"]="$AWS_KEYS"
+  ["GPG_PHRASE"]="$GPG_PHRASE"
+  ["CONSUL_HTTP_TOKEN"]="$CONSUL_HTTP_TOKEN"
+)
+for i in "${!ARRAY[@]}"; do
+  if [[ $(echo ${ARRAY[$i]} | grep errors) ]]; then
+    echo "Error getting ${i}:"
+    echo ${ARRAY[$i]}
     exit 1
   fi
 done
