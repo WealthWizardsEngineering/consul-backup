@@ -1,7 +1,10 @@
 FROM alpine:latest
 
 ENV CONSUL_VERSION=1.0.6
-RUN apk add --no-cache bash py-pip py-setuptools curl gnupg jq
+
+RUN apk update
+RUn apk upgrade
+RUN apk add bash py-pip py-setuptools curl gnupg jq
 RUN rm -rf /var/cache/apk/*
 
 RUN pip install --no-cache-dir s3cmd
