@@ -1,7 +1,6 @@
 [default]
 access_key = $ACCESS_KEY
 bucket_location = EU
-encrypt = True
 follow_symlinks = False
 host_base = s3.amazonaws.com
 host_bucket = %(bucket)s.s3.amazonaws.com
