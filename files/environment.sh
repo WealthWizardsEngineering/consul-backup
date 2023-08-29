@@ -39,10 +39,6 @@ AWS_KEYS=$(curl -sS --header "X-Vault-Token: ${APPROLE_TOKEN}" \
 export ACCESS_KEY=$(echo $AWS_KEYS | jq -r '.data.access_key')
 export SECRET_KEY=$(echo $AWS_KEYS | jq -r '.data.secret_key')
 
-export GPG_PHRASE=$(curl -sS --header "X-Vault-Token: ${APPROLE_TOKEN}" \
-    ${VAULT_ADDR}/v1/secret/infrastructure/${VAULT_LOGIN_ROLE} | \
-    jq -r 'if .errors then . else .data.gpg_phrase end')
-
 export CONSUL_HTTP_TOKEN=$(curl -sS --header "X-Vault-Token: ${APPROLE_TOKEN}" \
     ${VAULT_ADDR}/v1/consul/creds/management | \
     jq -r 'if .errors then . else .data.token end')
@@ -58,7 +54,6 @@ declare -A ARRAY=(
   ["SECRET_ID"]="$SECRET_ID"
   ["APPROLE_TOKEN"]="$APPROLE_TOKEN"
   ["AWS_KEYS"]="$AWS_KEYS"
-  ["GPG_PHRASE"]="$GPG_PHRASE"
   ["CONSUL_HTTP_TOKEN"]="$CONSUL_HTTP_TOKEN"
 )
 for i in "${!ARRAY[@]}"; do

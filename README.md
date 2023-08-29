@@ -25,7 +25,6 @@ Update `env.list` accordingly and run:
 #### Required for both backup and restore operations
 - `CONSUL_HTTP_ADDR`: Consul URL, i.e. https://consul.domain
 - `S3_BUCKET`: S3 bucket name for storing backups
-- `GPG_PHRASE`: Key used to encrypt Consul backups
 ##
 #### Set only for restore
 - `REMOTE_FILE_PATH`: 2018/02/16/consul-backup-11-03-17.snap

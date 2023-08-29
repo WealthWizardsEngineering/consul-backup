@@ -1,7 +1,6 @@
 #!/bin/bash -e
 
 unset_vars() {
-  unset GPG_PHRASE
   unset CONSUL_HTTP_TOKEN
   unset ACCESS_KEY
   unset SECRET_KEY
@@ -20,7 +19,7 @@ S3_BACKUP_DIR="$(date +"%Y")/$(date +"%m")/$(date +"%d")"
 # Define where and how to send events to influx
 POST2INFLUX="curl -XPOST --data-binary @- ${INFLUXDB_URL}"
 
-# Get CONSUL_HTTP_TOKEN, GPG_PHRASE, ACCESS_KEY and SECRET_KEY
+# Get CONSUL_HTTP_TOKEN, ACCESS_KEY and SECRET_KEY
 source /environment.sh
 
 # Backup consul
